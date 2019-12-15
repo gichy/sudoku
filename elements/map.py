@@ -26,6 +26,8 @@ class Map:
             f.set_pot_vals()
 
         while not self.is_full() and (self.naked_single() or self.hidden_single()):
+            for d in self.distincts:
+                d.do_naked_pairs_drop()
             self.pretty_print()
         self.pretty_print()
         '''changed = True

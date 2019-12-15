@@ -24,6 +24,35 @@ class Distinct():
                 hs.pop(k)
         return [(field,val) for val,field in hs.items()]
 
-    def dropPotVal(self, val):
+    def drop_pot_val(self, val):
         for f in self.fields:
             f.drop_pot_val(val)
+
+    def find_naked_pairs(self):
+        np = []
+        res = []
+        for field in self.fields:
+            if not field.fixed:
+                if len(field.potvals) == 2 and field.potvals in np:
+                    res.append(field.potvals)
+                elif len(field.potvals) == 2:
+                    np.append(field.potvals)
+        if res:
+            print("np found")
+            print(", ".join([str(field.id) for field in self.fields]))
+            for r in res:
+                print(", ".join([str(potval) for potval in r]))
+        return res
+
+    def do_naked_pairs_drop(self):
+        naked_pairs = self.find_naked_pairs()
+        for np in naked_pairs:
+            for field in self.fields:
+                if not field.fixed and np != field.potvals:
+                    print("potvals being dropped here: " + str(field.id))
+                    print("original potvals:")
+                    print(field.potvals)
+                    field.drop_pot_vals(np)
+                    print("new potvals:")
+                    print(field.potvals)
+

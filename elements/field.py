@@ -25,9 +25,9 @@ class Field:
     def set_value(self, val):
         self.value = val
         self.fixed = True
-        self.col.dropPotVal(val)
-        self.row.dropPotVal(val)
-        self.square.dropPotVal(val)
+        self.col.drop_pot_val(val)
+        self.row.drop_pot_val(val)
+        self.square.drop_pot_val(val)
         self.col.setValues()
         self.row.setValues()
         self.square.setValues()
@@ -42,6 +42,9 @@ class Field:
 
     def drop_pot_val(self, val):
         self.potvals.discard(val)
+
+    def drop_pot_vals(self, vals):
+        self.potvals = self.potvals - vals
 
     def get_printable_val(self):
         return str(self.value) if self.value else "-"
