@@ -18,12 +18,12 @@ class Map:
             i = 0
             with open(file, "r") as f:
                 for i, line in enumerate(f):
-                    self.rows[i].setRowValues(list(line))
+                    self.rows[i].set_row_values(list(line))
                 #i += 1
         print([[field.value for field in r.fields] for r in self.rows])
-        self.setValueSets()
+        self.set_value_sets()
         for f in self.fields:
-            f.setPotVals()
+            f.set_pot_vals()
 
         while not self.is_full() and (self.naked_single() or self.hidden_single()):
             self.pretty_print()
@@ -31,17 +31,17 @@ class Map:
         '''changed = True
         while changed:
             changed = False
-            self.setValueSets()
+            self.set_value_sets()
             for f in self.fields:
-                f.setPotVals()
+                f.set_pot_vals()
                 #print(len(f.potvals))
                 if f.fixed == False and len(f.potvals) == 1:
-                    f.setValue(list(f.potvals)[0])
+                    f.set_value(list(f.potvals)[0])
                     changed = True
             print([[field.value for field in r.fields] for r in self.rows])
             self.pretty_print()'''
 
-    def setValueSets(self):
+    def set_value_sets(self):
         for c in self.cols:
             c.setValues()
         for c in self.rows:
@@ -53,15 +53,15 @@ class Map:
         changed = False
         for f in self.fields:
             if f.fixed == False and len(f.potvals) == 1:
-                f.setValue(list(f.potvals)[0])
+                f.set_value(list(f.potvals)[0])
                 changed = True
         return changed
 
     def hidden_single(self):
         changed = False
         for d in self.distincts:
-            for field, val in d.getHiddenSingles():
-                field.setValue(val)
+            for field, val in d.get_hidden_singles():
+                field.set_value(val)
                 changed = True
         return changed
 
@@ -80,10 +80,10 @@ class Map:
         for i, r in enumerate(self.rows):
             if i ==3 or i == 6:
                 print("|===+===+===|")
-            print("|" + "".join([f.getPrintableVal() for f in r.fields[0:3]]) +
-                  "|" + "".join([f.getPrintableVal() for f in r.fields[3:6]]) +
-                  "|" + "".join([f.getPrintableVal() for f in r.fields[6:9]]) + "|")
+            print("|" + "".join([f.get_printable_val() for f in r.fields[0:3]]) +
+                  "|" + "".join([f.get_printable_val() for f in r.fields[3:6]]) +
+                  "|" + "".join([f.get_printable_val() for f in r.fields[6:9]]) + "|")
         print("\===========/")
 
 if __name__ == '__main__':
-    map = Map("/home/agi/suex.txt")
+    map = Map("/home/agi/suex2.txt")

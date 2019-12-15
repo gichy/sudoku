@@ -4,9 +4,9 @@ class Row(Distinct):
     def __init__(self, fields):
         super().__init__(fields)
         for field in self.fields:
-            field.setRow(self)
+            field.set_row(self)
 
-    def setRowValues(self, vals):
+    def set_row_values(self, vals):
         for i, field in enumerate(self.fields):
             if vals[i] != "-":
-                field.setValue(int(vals[i]))
+                field.set_value(int(vals[i]))

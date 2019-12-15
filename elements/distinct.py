@@ -8,7 +8,7 @@ class Distinct():
             if f.fixed:
                 self.values.add(f.value)
 
-    def getHiddenSingles(self):
+    def get_hidden_singles(self):
         self.setValues()
         hs = {v : 0 for v in (set(range(1,10)) - self.values)}
         for f in self.fields:
@@ -26,4 +26,4 @@ class Distinct():
 
     def dropPotVal(self, val):
         for f in self.fields:
-            f.dropPotVal(val)
+            f.drop_pot_val(val)

@@ -11,18 +11,18 @@ class Field:
     def __init__(self, id):
         self.id = id
 
-    def setRow(self, row):
+    def set_row(self, row):
         self.row = row
 
-    def setCol(self, col):
+    def set_col(self, col):
         self.col = col
 
 
-    def setSquare(self, square):
+    def set_square(self, square):
         self.square = square
 
 
-    def setValue(self, val):
+    def set_value(self, val):
         self.value = val
         self.fixed = True
         self.col.dropPotVal(val)
@@ -33,15 +33,15 @@ class Field:
         self.square.setValues()
         self.potvals = set([val])
 
-    def setPotVals(self):
+    def set_pot_vals(self):
         #print(self.row.values)
         #print(self.col.values)
         #print(self.square.values)
         #print(set(range(1,10)) - self.row.values - self.col.values - self.square.values)
         self.potvals = set(range(1,10)) - self.row.values - self.col.values - self.square.values
 
-    def dropPotVal(self, val):
+    def drop_pot_val(self, val):
         self.potvals.discard(val)
 
-    def getPrintableVal(self):
+    def get_printable_val(self):
         return str(self.value) if self.value else "-"
