@@ -22,6 +22,9 @@ class Map:
                 #i += 1
         print([[field.value for field in r.fields] for r in self.rows])
         self.set_value_sets()
+
+
+    def main(self):
         for f in self.fields:
             f.set_pot_vals()
 
@@ -89,3 +92,4 @@ class Map:
 
 if __name__ == '__main__':
     map = Map("/home/agi/suex2.txt")
+    map.main()
