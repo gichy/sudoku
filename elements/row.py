@@ -1,4 +1,9 @@
-from distinct import Distinct
+import sys
+sys.path.append("../")
+import elements
+
+
+from elements.distinct import Distinct
 
 class Row(Distinct):
     def __init__(self, fields):

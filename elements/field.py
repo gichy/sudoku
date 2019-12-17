@@ -1,3 +1,8 @@
+import sys
+sys.path.append("../")
+import elements
+
+
 class Field:
 
     id = None

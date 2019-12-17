@@ -1,8 +1,12 @@
-from col import Col
-from field import Field
-from row import Row
-from distinct import Distinct
-from square import Square
+import sys
+sys.path.append("../")
+import elements
+
+from elements.col import Col
+from elements.field import Field
+from elements.row import Row
+from elements.distinct import Distinct
+from elements.square import Square
 
 class Map:
     def __init__(self, file=""):
