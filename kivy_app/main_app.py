@@ -14,6 +14,25 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.metrics import cm
 
+#TODO:
+# keep functionality, nicer layout
+# separate model and view related stuff somehow
+# kv file for structure
+# highlight hints
+# error check
+# disable potvals is value is fixed
+# handle initial and fixed values differently
+# buttons for debugging
+# logging messages
+# debugging mode with message box
+# meaningful function names
+# naming conventions: model-view separation
+# backtracking algorithm
+# x wing
+# further tactics
+# general scheme that can be applied to other puzzles
+# mobile responsive version
+
 def on_text(instance, value):
     print('The widget', instance, 'have:', value)
 
@@ -35,7 +54,7 @@ class SudokuField(GridLayout):
         super(SudokuField, self).__init__(**kwargs)
         self.puzzle_screen = puzzle_screen
         self.cols = 1
-        bg_img = "../images/FF4D00-0.8.png"
+        bg_img = "../images/NFFFFFF-1.png"
         self.map = map
         self.ti_potvals = SudokuFieldPotVal(bgval, bg_img)
         self.ti = SudokuFieldVal(bgval, bg_img)
@@ -51,7 +70,7 @@ class SudokuField(GridLayout):
             self.ti.text = ""
             self.ti.font_size = 30
             field.set_pot_vals()
-            self.ti_potvals.text = "".join([str(x) for x in list(field.potvals)])
+            self.ti_potvals.text = field.get_pot_vals_str()
             #self.ti_potvals.bind(on_focus=show_pot_vals)
         #self.ti.bind(text=set_value)
         #self.ti_potvals.bind(text=self.set_value)
@@ -79,7 +98,7 @@ class SudokuField(GridLayout):
     def sync(self):
         self.ti.text = str(self.field.value) if self.field.value in range(1,10) else ""
         if not self.field.fixed:
-            self.ti_potvals.text = "".join([str(x) for x in list(self.field.potvals)])
+            self.ti_potvals.text = self.field.get_pot_vals_str()
 
 
 class SudokuFieldVal(TextInput):
@@ -87,11 +106,11 @@ class SudokuFieldVal(TextInput):
         super(SudokuFieldVal, self).__init__(**kwargs)
         self.multiline = False
         self.font_size = 30
-        self.background_color = [1, 30 if bgval else 1, 3, 2]
+        self.background_color = [.8 if bgval else .3, .8 if bgval else .3, .9, 1]
         self.background_normal = bg_img
         self.background_disabled_normal = bg_img
         self.background_active = bg_img
-        self.size_hint_y = .4
+        self.size_hint_y = .85
         self.padding = [10, 0, 0, 0]
 
 
@@ -99,12 +118,13 @@ class SudokuFieldPotVal(TextInput):
     def __init__(self, bgval, bg_img, **kwargs):
         super(SudokuFieldPotVal, self).__init__(**kwargs)
         self.multiline = False
-        self.font_size = 8
-        self.background_color = [1, 30 if bgval else 1, 3, 2]
+        self.font_size = 11
+        self.background_color = [.8 if bgval else .3, .8 if bgval else .3, .9, .85]
         self.background_normal = bg_img
         self.background_disabled_normal = bg_img
         self.background_active = bg_img
         self.size_hint_y = .4
+        self.padding = [3, 3, 0, 0]
 
 '''
 class SudokuFieldTextInput(TextInput):
@@ -192,7 +212,7 @@ class PuzzleScreen(GridLayout):
     def sync(self):
         for field in self.fields:
             field.sync()
-        print("potvals for field 8: " + "".join([str(val) for val in self.map.fields[8].potvals]))
+        #print("potvals for field 8: " + "".join([str(val) for val in self.map.fields[8].potvals]))
 
 
 

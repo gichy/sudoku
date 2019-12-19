@@ -47,7 +47,11 @@ class Field:
         self.potvals = set(range(1,10)) - self.row.values - self.col.values - self.square.values
 
     def update_pot_vals(self, pot_vals_str):
-        self.potvals = set(list(pot_vals_str))
+        print("former potvals: " + self.get_pot_vals_str())
+        print("new str: " + pot_vals_str)
+        print("replaced: " + pot_vals_str.replace(" ", ""))
+        self.potvals = set([int(x) for x in pot_vals_str.replace(" ", "")])
+        print("new potvals: " + self.get_pot_vals_str())
 
     def set_pot_val_set(self, potvals):
         self.potvals = potvals
@@ -65,4 +69,11 @@ class Field:
         return str(self.value) if self.value else "-"
 
     def get_pot_vals_str(self):
-        return "".join([str(x) for x in list(self.potvals)])
+        pvs = ""
+        for i in range(1, 10):
+            if i in self.potvals:
+                pvs = pvs + str(i)
+            else:
+                pvs = pvs + " "
+        return pvs
+        #return "".join([str(x) for x in sorted(list(self.potvals))])
